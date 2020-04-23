@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 class Auth extends Component {
   state = {
@@ -8,7 +10,7 @@ class Auth extends Component {
   handleSubmit = () => {
     const { identifiant, password } = this.state
     if (identifiant && password)
-      console.log('Submit Auth', identifiant, password)
+      this.props.userActions.authRequest({ identifiant, password })
   }
   handleChange = event => {
     const { target } = event
