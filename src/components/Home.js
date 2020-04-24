@@ -1,9 +1,21 @@
 import React, { Component } from 'react'
 
+import BandwidthChart from './BandwidthChart'
+import AudienceChart from './AudienceChart'
+
+import TestChart from './TestChart'
+import Test2Chart from './Test2Chart'
+
 class Home extends Component {
   componentDidMount() {
     if (!this.props.notif.all) {
       this.props.notifActions.notifRequest()
+    }
+    if (!this.props.data.bandwidth) {
+      this.props.dataActions.dataRequest()
+    }
+    if (!this.props.data.audience) {
+      this.props.dataActions.dataRequestA()
     }
   }
   handleLogout = () => {
@@ -11,7 +23,7 @@ class Home extends Component {
   }
   render() {
     return (
-      <div style={{ width: '100%', display: 'flex' }}>
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
         <div>
           notifs
           <div>
@@ -36,11 +48,36 @@ class Home extends Component {
           <div>email: {this.props.user.info.email}</div>
           <div>timestamp: {this.props.user.info.timestamp}</div>
           <div>
-            ({new Date(this.props.user.info.timestamp * 1000).toLocaleString()})
+            ({new Date(this.props.user.info.timestamp).toLocaleString()})
           </div>
           <div>website: {this.props.user.info.website}</div>
         </div>
         <button onClick={() => this.handleLogout()}>logout</button>
+        <div>
+          DATA
+          <div>bandwidth in Bits per second</div>
+          <div>
+            {this.props.data.bandwidth && (
+              <BandwidthChart bandwidth={this.props.data.bandwidth} />
+            )}
+          </div>
+          <div>audience in number of viewers</div>
+          <div>
+            {this.props.data.audience && (
+              <AudienceChart viewers={this.props.data.audience} />
+            )}
+          </div>
+          <div>
+            {this.props.data.bandwidth && (
+              <TestChart bandwidth={this.props.data.bandwidth} />
+            )}
+          </div>
+          <div>
+            {this.props.data.bandwidth && (
+              <Test2Chart bandwidth={this.props.data.bandwidth} />
+            )}
+          </div>
+        </div>
       </div>
     )
   }

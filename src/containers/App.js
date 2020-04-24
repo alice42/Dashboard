@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux'
 
 import * as userActions from '../actions/userActions'
 import * as notifActions from '../actions/notifActions'
+import * as dataActions from '../actions/dataActions'
 
 import Auth from '../components/Auth'
 import Error from '../components/Error'
@@ -31,15 +32,17 @@ class App extends Component {
 const actionsMapDispatchToProps = dispatch => {
   return {
     userActions: bindActionCreators(userActions, dispatch),
-    notifActions: bindActionCreators(notifActions, dispatch)
+    notifActions: bindActionCreators(notifActions, dispatch),
+    dataActions: bindActionCreators(dataActions, dispatch)
   }
 }
 
 const mapStateToProps = state => {
-  const { user, notif } = state
+  const { user, notif, data } = state
   return {
     user,
-    notif
+    notif,
+    data
   }
 }
 
