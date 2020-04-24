@@ -3,6 +3,8 @@ export const routeAuth = 'auth'
 export const routeMyInfo = 'myinfo'
 export const routeLogout = 'logout'
 
+export const routeNotif = 'notifications'
+
 //BASIC FETCH API METHOD
 
 export const basicFetch = async (method, url, config, data) => {

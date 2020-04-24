@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
-import * as userActions from '../actions/userActions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
+
+import * as userActions from '../actions/userActions'
+import * as notifActions from '../actions/notifActions'
+
 import Auth from '../components/Auth'
 import Error from '../components/Error'
 import Home from '../components/Home'
@@ -27,14 +30,16 @@ class App extends Component {
 
 const actionsMapDispatchToProps = dispatch => {
   return {
-    userActions: bindActionCreators(userActions, dispatch)
+    userActions: bindActionCreators(userActions, dispatch),
+    notifActions: bindActionCreators(notifActions, dispatch)
   }
 }
 
 const mapStateToProps = state => {
-  const { user } = state
+  const { user, notif } = state
   return {
-    user
+    user,
+    notif
   }
 }
 
