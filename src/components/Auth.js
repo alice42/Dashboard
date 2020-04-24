@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 class Auth extends Component {
   state = {
@@ -46,7 +44,7 @@ class Auth extends Component {
               this.handleChange(e)
             }}
           />
-          <button onClick={() => this.handleSubmit()}>SUBMIT</button>
+          <button onClick={() => this.handleSubmit()}>login</button>
         </div>
       </div>
     )

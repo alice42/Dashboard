@@ -1,5 +1,7 @@
 export const api = 'http://localhost:3000/'
 export const routeAuth = 'auth'
+export const routeMyInfo = 'myinfo'
+export const routeLogout = 'logout'
 
 //BASIC FETCH API METHOD
 
@@ -15,7 +17,7 @@ export const basicFetch = async (method, url, config, data) => {
     })
     const textResponse = await response.text()
     const result = {
-      message: textResponse,
+      data: textResponse,
       status: response.status
     }
     return result
