@@ -10,6 +10,7 @@ import Auth from '../components/Auth'
 import Error from '../components/Error'
 import Home from '../components/Home'
 
+import { Container } from '@material-ui/core'
 class App extends Component {
   render() {
     const token = window.localStorage.getItem('token')
@@ -17,14 +18,14 @@ class App extends Component {
       this.props.userActions.init(token)
     }
     return (
-      <div>
+      <Container>
         {this.props.user.error && <Error message={this.props.user.error} />}
         {this.props.user.token && this.props.user.info ? (
           <HomeConnected />
         ) : (
           <AuthConnected />
         )}
-      </div>
+      </Container>
     )
   }
 }

@@ -1,15 +1,18 @@
 import React, { Component } from 'react'
-
+import { StylesProvider } from '@material-ui/core/styles'
 import theme from '../theme'
-
-import AppBar from '@material-ui/core/AppBar'
-import Typography from '@material-ui/core/Typography'
-
+import { ThemeMixinsToolBar, StyledContainer, StyledMain } from './StyledHome'
 import BandwidthChart from './BandwidthChart'
 import AudienceChart from './AudienceChart'
 import TestChart from './TestChart'
+import Header from './Home/Header'
 
 class Home extends Component {
+  state = {
+    open: { user: false, notif: false },
+    anchorEl: { user: null, notif: null }
+  }
+
   componentDidMount() {
     if (!this.props.notif.all) {
       this.props.notifActions.notifRequest()
@@ -21,66 +24,66 @@ class Home extends Component {
       this.props.dataActions.dataRequestA()
     }
   }
+
   handleLogout = () => {
     this.props.userActions.logoutRequest()
   }
+
+  handleMenu = (event, type) => {
+    this.setState({
+      open: { ...this.state.open, [`${type}`]: true },
+      anchorEl: { ...this.state.anchorEl, [`${type}`]: event.currentTarget }
+    })
+  }
+
+  handleClose = type => {
+    this.setState({
+      open: { ...this.state.open, [`${type}`]: false },
+      anchorEl: { ...this.state.anchorEl, [`${type}`]: null }
+    })
+  }
+
   render() {
-    const { classes } = this.props
     return (
-      <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
-        <AppBar style={theme.palette.reds.HotPink}>
-          <Typography variant="h3">My header</Typography>
-        </AppBar>
-        <div>
-          notifs
-          <div>
-            {this.props.notif.all &&
-              this.props.notif.all.map((notif, index) => (
-                <div key={index}>
-                  <div>type: {notif.type}</div>
-                  <div>message: {notif.message}</div>
-                </div>
-              ))}
-          </div>
-        </div>
-        <div style={{ color: 'green' }}>
-          Welcome {this.props.user.info.fname} {this.props.user.info.lname}
-        </div>
-        <div>
-          All info
-          <div>apitoken: {this.props.user.info.apitoken}</div>
-          <div>clientid: {this.props.user.info.clientid}</div>
-          <div>company: {this.props.user.info.company}</div>
-          <div>description: {this.props.user.info.description}</div>
-          <div>email: {this.props.user.info.email}</div>
-          <div>timestamp: {this.props.user.info.timestamp}</div>
-          <div>
-            ({new Date(this.props.user.info.timestamp).toLocaleString()})
-          </div>
-          <div>website: {this.props.user.info.website}</div>
-        </div>
-        <button onClick={() => this.handleLogout()}>logout</button>
-        <div>
-          DATA
-          <div>bandwidth in Bits per second</div>
-          <div>
-            {this.props.data.bandwidth && (
-              <BandwidthChart bandwidth={this.props.data.bandwidth} />
-            )}
-          </div>
-          <div>audience in number of viewers</div>
-          <div>
-            {this.props.data.audience && (
-              <AudienceChart viewers={this.props.data.audience} />
-            )}
-          </div>
-          <div>
-            {this.props.data.bandwidth && (
-              <TestChart bandwidth={this.props.data.bandwidth} />
-            )}
-          </div>
-        </div>
-      </div>
+      <StylesProvider injectFirst>
+        <Header
+          handleLogout={this.handleLogout}
+          handleClose={this.handleClose}
+          handleMenu={this.handleMenu}
+          open={this.state.open}
+          anchorEl={this.state.anchorEl}
+          notifs={this.props.notif.all}
+          info={this.props.user.info}
+        />
+
+        <StyledMain>
+          <StyledContainer
+            maxWidth="lg"
+            themespacing={theme.spacing(4)}
+            spacing={3}
+          >
+            <ThemeMixinsToolBar theme={theme.mixins.toolbar} />
+            DATA
+            <div>bandwidth in Bits per second</div>
+            <div>
+              {this.props.data.bandwidth && (
+                <BandwidthChart bandwidth={this.props.data.bandwidth} />
+              )}
+            </div>
+            <div>audience in number of viewers</div>
+            <div>
+              {this.props.data.audience && (
+                <AudienceChart viewers={this.props.data.audience} />
+              )}
+            </div>
+            <div>
+              {this.props.data.bandwidth && (
+                <TestChart bandwidth={this.props.data.bandwidth} />
+              )}
+            </div>
+          </StyledContainer>
+        </StyledMain>
+      </StylesProvider>
     )
   }
 }
