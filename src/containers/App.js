@@ -17,7 +17,7 @@ class App extends Component {
       this.props.userActions.init(token)
     }
     return (
-      <div style={{ width: '100%', display: 'flex' }}>
+      <div>
         {this.props.user.error && <Error message={this.props.user.error} />}
         {this.props.user.token && this.props.user.info ? (
           <HomeConnected />

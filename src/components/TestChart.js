@@ -104,13 +104,10 @@ class TestChart extends React.Component {
       },
       { name: '_row_id', type: 'string' }
     ]
-    console.log(data)
-    console.log(schema)
     const fusionTable = new FusionCharts.DataStore().createDataTable(
       data,
       schema
     )
-    console.log(fusionTable)
     const timeseriesDs = Object.assign({}, this.state.timeseriesDs)
     timeseriesDs.dataSource.data = fusionTable
     // this.onFetchData()

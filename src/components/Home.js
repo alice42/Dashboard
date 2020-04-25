@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 
+import theme from '../theme'
+
+import AppBar from '@material-ui/core/AppBar'
+import Typography from '@material-ui/core/Typography'
+
 import BandwidthChart from './BandwidthChart'
 import AudienceChart from './AudienceChart'
-
 import TestChart from './TestChart'
-import Test2Chart from './Test2Chart'
 
 class Home extends Component {
   componentDidMount() {
@@ -22,8 +25,12 @@ class Home extends Component {
     this.props.userActions.logoutRequest()
   }
   render() {
+    const { classes } = this.props
     return (
       <div style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
+        <AppBar style={theme.palette.reds.HotPink}>
+          <Typography variant="h3">My header</Typography>
+        </AppBar>
         <div>
           notifs
           <div>
@@ -70,11 +77,6 @@ class Home extends Component {
           <div>
             {this.props.data.bandwidth && (
               <TestChart bandwidth={this.props.data.bandwidth} />
-            )}
-          </div>
-          <div>
-            {this.props.data.bandwidth && (
-              <Test2Chart bandwidth={this.props.data.bandwidth} />
             )}
           </div>
         </div>
