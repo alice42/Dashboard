@@ -13,6 +13,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications'
 import { StyledMenuItem } from './StyledHeader'
 
 const Header = ({
+  theme,
   anchorEl,
   open,
   handleClose,
@@ -22,7 +23,7 @@ const Header = ({
   info
 }) => {
   return (
-    <AppBar>
+    <AppBar style={theme.palette.reds.Velvet}>
       <Toolbar>
         <Typography variant="h3" style={{ flexGrow: 1 }}>
           Dashboard

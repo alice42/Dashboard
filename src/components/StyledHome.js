@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Container } from '@material-ui/core'
+import { Container, Paper } from '@material-ui/core'
 
 export const ThemeMixinsToolBar = styled.div`
   ${props => ({ ...props.theme })};
@@ -14,4 +14,8 @@ export const StyledMain = styled.main`
   flexgrow: 1;
   height: 100vh;
   overflow: 'auto';
+`
+
+export const StyledPaper = styled(Paper)`
+  padding: 25px;
 `

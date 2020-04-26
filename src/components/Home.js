@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import { StylesProvider } from '@material-ui/core/styles'
+import { Grid } from '@material-ui/core'
 import theme from '../theme'
-import { ThemeMixinsToolBar, StyledContainer, StyledMain } from './StyledHome'
+import {
+  ThemeMixinsToolBar,
+  StyledContainer,
+  StyledMain,
+  StyledPaper
+} from './StyledHome'
 import BandwidthChart from './BandwidthChart'
 import AudienceChart from './AudienceChart'
 import TestChart from './TestChart'
@@ -18,10 +24,11 @@ class Home extends Component {
       this.props.notifActions.notifRequest()
     }
     if (!this.props.data.bandwidth) {
-      this.props.dataActions.dataRequest()
+      this.props.dataActions.dataRequest('bandwidth')
+      this.props.dataActions.dataRequest('bandwidth', 'max')
     }
     if (!this.props.data.audience) {
-      this.props.dataActions.dataRequestA()
+      this.props.dataActions.dataRequest('audience')
     }
   }
 
@@ -47,6 +54,7 @@ class Home extends Component {
     return (
       <StylesProvider injectFirst>
         <Header
+          theme={theme}
           handleLogout={this.handleLogout}
           handleClose={this.handleClose}
           handleMenu={this.handleMenu}
@@ -63,24 +71,37 @@ class Home extends Component {
             spacing={3}
           >
             <ThemeMixinsToolBar theme={theme.mixins.toolbar} />
-            DATA
-            <div>bandwidth in Bits per second</div>
-            <div>
-              {this.props.data.bandwidth && (
-                <BandwidthChart bandwidth={this.props.data.bandwidth} />
-              )}
-            </div>
-            <div>audience in number of viewers</div>
-            <div>
-              {this.props.data.audience && (
-                <AudienceChart viewers={this.props.data.audience} />
-              )}
-            </div>
-            <div>
-              {this.props.data.bandwidth && (
-                <TestChart bandwidth={this.props.data.bandwidth} />
-              )}
-            </div>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6} lg={6}>
+                <StyledPaper>A</StyledPaper>
+              </Grid>
+              <Grid item xs={12} md={6} lg={6}>
+                <StyledPaper>B</StyledPaper>
+              </Grid>
+              <Grid item xs={12}>
+                <StyledPaper>
+                  {this.props.data.bandwidth &&
+                    this.props.data.bandwidth.data &&
+                    this.props.data.bandwidth.max && (
+                      <BandwidthChart bandwidth={this.props.data.bandwidth} />
+                    )}
+                </StyledPaper>
+              </Grid>
+              <Grid item xs={12}>
+                <StyledPaper>
+                  {this.props.data.audience && (
+                    <AudienceChart viewers={this.props.data.audience.data} />
+                  )}
+                </StyledPaper>
+              </Grid>
+              <Grid item xs={12}>
+                <StyledPaper>
+                  {this.props.data.bandwidth && (
+                    <TestChart bandwidth={this.props.data.bandwidth.data} />
+                  )}
+                </StyledPaper>
+              </Grid>
+            </Grid>
           </StyledContainer>
         </StyledMain>
       </StylesProvider>

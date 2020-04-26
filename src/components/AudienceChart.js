@@ -9,6 +9,10 @@ class AudienceChart extends React.Component {
         height: 350,
         type: 'line'
       },
+      title: {
+        text: 'CONCURRENT VIEWERS',
+        align: 'left'
+      },
       dataLabels: {
         enabled: false
       },

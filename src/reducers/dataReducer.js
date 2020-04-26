@@ -1,9 +1,4 @@
-import {
-  DATA_SUCCESS,
-  DATA_ERROR,
-  DATA_SUCCESSA,
-  DATA_ERRORA
-} from '../actions/dataActions'
+import { DATA_SUCCESS, DATA_ERROR } from '../actions/dataActions'
 import { LOGOUT_SUCCESS } from '../actions/userActions'
 
 const initialState = {
@@ -19,23 +14,26 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case DATA_SUCCESS:
-      return {
-        ...state,
-        bandwidth: action.result,
-        error: null
+      if (action.result.aggregateType) {
+        return {
+          ...state,
+          [`${action.result.type}`]: {
+            ...state[`${action.result.type}`],
+            [`${action.result.aggregateType}`]: action.result.data
+          },
+          error: null
+        }
+      } else {
+        return {
+          ...state,
+          [`${action.result.type}`]: {
+            ...state[`${action.result.type}`],
+            data: action.result.data
+          },
+          error: null
+        }
       }
     case DATA_ERROR:
-      return {
-        ...state,
-        error: action.error
-      }
-    case DATA_SUCCESSA:
-      return {
-        ...state,
-        audience: action.result,
-        error: null
-      }
-    case DATA_ERRORA:
       return {
         ...state,
         error: action.error

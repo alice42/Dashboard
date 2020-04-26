@@ -8,6 +8,10 @@ class BandwidthChart extends React.Component {
         height: 350,
         type: 'line'
       },
+      title: {
+        text: 'CAPACITY OFFLOAD',
+        align: 'left'
+      },
       dataLabels: {
         enabled: false
       },
@@ -27,20 +31,38 @@ class BandwidthChart extends React.Component {
         tooltip: {
           enabled: false
         }
+      },
+      yaxis: {
+        title: {
+          text: 'Gbps'
+        }
+      },
+      legend: {
+        offsetY: 5,
+        tooltipHoverFormatter: function(val, opts) {
+          return (
+            val +
+            ' - ' +
+            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
+            ''
+          )
+        }
       }
     },
     series: []
   }
 
   componentDidMount() {
-    const data = {
+    const parsedData = {
       cdn: [],
       p2p: []
     }
+    let max
     if (this.props.bandwidth) {
-      for (const dataType in this.props.bandwidth) {
-        this.props.bandwidth[dataType].forEach(value => {
-          data[dataType].push([
+      max = this.props.bandwidth.max
+      for (const dataType in this.props.bandwidth.data) {
+        this.props.bandwidth.data[dataType].forEach(value => {
+          parsedData[dataType].push([
             new Date(value[0]),
             (value[1] / 1000000000).toFixed(2)
           ])
@@ -54,7 +76,7 @@ class BandwidthChart extends React.Component {
         annotations: {
           yaxis: [
             {
-              y: 370,
+              y: (max.p2p / 1000000000).toFixed(2),
               borderColor: '#775DD0',
               label: {
                 borderColor: '#775DD0',
@@ -62,11 +84,13 @@ class BandwidthChart extends React.Component {
                   color: '#fff',
                   background: '#775DD0'
                 },
-                text: 'MAX P2P'
+                text: `Maximum throughput: ${(max.p2p / 1000000000).toFixed(
+                  2
+                )} Gbps`
               }
             },
             {
-              y: 100,
+              y: (max.cdn / 1000000000).toFixed(2),
               borderColor: '#FF4560',
               label: {
                 borderColor: '#FF4560',
@@ -74,7 +98,9 @@ class BandwidthChart extends React.Component {
                   color: '#fff',
                   background: '#FF4560'
                 },
-                text: 'MAX CDN'
+                text: `Maximum CDN contribution: ${(
+                  max.cdn / 1000000000
+                ).toFixed(2)} Gbps`
               }
             }
           ]
@@ -84,12 +110,12 @@ class BandwidthChart extends React.Component {
         {
           type: 'area',
           name: 'CDN',
-          data: data.cdn
+          data: parsedData.cdn
         },
         {
           type: 'area',
           name: 'P2P',
-          data: data.p2p
+          data: parsedData.p2p
         }
       ]
     })
