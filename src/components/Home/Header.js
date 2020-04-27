@@ -23,7 +23,7 @@ const Header = ({
   info
 }) => {
   return (
-    <AppBar style={theme.palette.reds.Velvet}>
+    <AppBar style={theme.palette.blues.Twilight}>
       <Toolbar>
         <Typography variant="h3" style={{ flexGrow: 1 }}>
           Dashboard
@@ -45,7 +45,6 @@ const Header = ({
           </IconButton>
           <Menu
             id="menu-appbar-notif"
-            //
             anchorEl={anchorEl.notif}
             anchorOrigin={{
               vertical: 'top',

@@ -11,7 +11,9 @@ import {
 
 const data = {
   bandwidth: routeBandwidth,
-  audience: routeAudience
+  audience: routeAudience,
+  countries: routeCountries,
+  platforms: routePlatforms
 }
 
 function toTimestamp(strDate) {

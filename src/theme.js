@@ -1,6 +1,4 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 
 import AlternateGothic from './assets/fonts/AlternateGothic.woff2'
 import SourceSansPro from './assets/fonts/SourceSansPro.woff2'
@@ -24,26 +22,26 @@ let theme = createMuiTheme({
   palette: {
     reds: {
       LightPink: { backgroundColor: '#FFE0E9' },
-      HotPink: { backgroundColor: '#C42151' },
+      HotPink: { backgroundColor: '#C42151' }, // <-- Primary red color (CDN)
       Rouge: { backgroundColor: '#9A193E' },
       Velvet: { backgroundColor: '#570D22' }
     },
     blues: {
       LightBlue: { backgroundColor: '#C6ECFF' },
-      Azure: { backgroundColor: '#12A5ED' },
+      Azure: { backgroundColor: '#12A5ED' }, // <-- Primary blue color (P2P)
       PeacockBlue: { backgroundColor: '#005D9F' },
-      Twilight: { backgroundColor: '#0A3758​' },
+      Twilight: { backgroundColor: '#0A3758' }, // <-- Background color
       TwilightLight: { backgroundColor: '#506A84' }
     },
     greens: {
       LightGreen: '#C9EDD9',
-      Green: '#3FCB7E',
+      Green: '#3FCB7E', // <-- Primay green (Efficiency)
       Viridian: '#1D874D'
     },
     yellows: {
       LightYellow: { backgroundColor: '#FCE4A3' },
       Sunflower: { backgroundColor: '#FFBF10' },
-      BurntYellow: { backgroundColor: '#DDA02A' }
+      BurntYellow: { backgroundColor: '#DDA02A' } // <-- Primary yellow color (Audience)
     },
     grayscale: {
       White: { backgroundColor: 'white' },
@@ -60,7 +58,19 @@ let theme = createMuiTheme({
     h3: {
       fontFamily: 'AlternateGothic'
     },
+    h5: {
+      fontFamily: 'AlternateGothic'
+    },
+    body: {
+      fontFamily: 'SourceSansPro'
+    },
+    body1: {
+      fontFamily: 'SourceSansPro'
+    },
     body2: {
+      fontFamily: 'SourceSansPro'
+    },
+    button: {
       fontFamily: 'SourceSansPro'
     }
   },
