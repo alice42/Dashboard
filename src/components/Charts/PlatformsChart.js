@@ -1,12 +1,25 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
+import theme from '../../theme'
 
 class PlatformsChart extends React.Component {
   state = {
     options: {
       chart: {
         type: 'bar',
-        height: 350
+        height: 350,
+        fontFamily: theme.typography
+      },
+      colors: [
+        theme.palette.reds.HotPink.backgroundColor,
+        theme.palette.blues.Azure.backgroundColor
+      ],
+      title: {
+        text: 'Platforms',
+        align: 'left',
+        style: {
+          fontFamily: theme.typography.h3.fontFamily
+        }
       },
       plotOptions: {
         bar: {
@@ -69,19 +82,7 @@ class PlatformsChart extends React.Component {
         {
           name: 'P2P',
           data: parsedData.p2p
-        },
-        {
-          name: 'P2P UPLOAD',
-          data: parsedData.upload
         }
-        // {
-        //   name: 'MAX VIEWERS',
-        //   data: parsedData.max_viewers
-        // },
-        // {
-        //   name: 'AVERAGE VIEWERS',
-        //   data: parsedData.average_viewers
-        // }
       ]
     })
   }

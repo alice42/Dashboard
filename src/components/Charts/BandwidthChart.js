@@ -1,16 +1,25 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
+import theme from '../../theme'
 
 class BandwidthChart extends React.Component {
   state = {
     options: {
       chart: {
-        height: 350,
-        type: 'line'
+        height: 300,
+        type: 'line',
+        fontFamily: theme.typography
       },
+      colors: [
+        theme.palette.reds.HotPink.backgroundColor,
+        theme.palette.blues.Azure.backgroundColor
+      ],
       title: {
         text: 'CAPACITY OFFLOAD',
-        align: 'left'
+        align: 'left',
+        style: {
+          fontFamily: theme.typography.h3.fontFamily
+        }
       },
       dataLabels: {
         enabled: false
@@ -36,17 +45,6 @@ class BandwidthChart extends React.Component {
         title: {
           text: 'Gbps'
         }
-      },
-      legend: {
-        offsetY: 5,
-        tooltipHoverFormatter: function(val, opts) {
-          return (
-            val +
-            ' - ' +
-            opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
-            ''
-          )
-        }
       }
     },
     series: []
@@ -60,6 +58,7 @@ class BandwidthChart extends React.Component {
     let max
     if (this.props.bandwidth) {
       max = this.props.bandwidth.max
+      console.log(this.props.bandwidth)
       for (const dataType in this.props.bandwidth.data) {
         this.props.bandwidth.data[dataType].forEach(value => {
           parsedData[dataType].push([
@@ -73,16 +72,30 @@ class BandwidthChart extends React.Component {
       ...this.state,
       options: {
         ...this.state.options,
+        tooltip: {
+          x: {
+            show: true,
+            format: 'dd MMM y, hh:mm:ss'
+          },
+          y: {
+            formatter: value => {
+              return `${value} Gbps`
+            },
+            title: {
+              formatter: seriesName => seriesName
+            }
+          }
+        },
         annotations: {
           yaxis: [
             {
               y: (max.p2p / 1000000000).toFixed(2),
-              borderColor: '#775DD0',
+              borderColor: theme.palette.blues.Azure.backgroundColor,
               label: {
-                borderColor: '#775DD0',
+                borderColor: theme.palette.blues.Azure.backgroundColor,
                 style: {
                   color: '#fff',
-                  background: '#775DD0'
+                  background: theme.palette.blues.Azure.backgroundColor
                 },
                 text: `Maximum throughput: ${(max.p2p / 1000000000).toFixed(
                   2
@@ -91,12 +104,12 @@ class BandwidthChart extends React.Component {
             },
             {
               y: (max.cdn / 1000000000).toFixed(2),
-              borderColor: '#FF4560',
+              borderColor: theme.palette.reds.HotPink.backgroundColor,
               label: {
-                borderColor: '#FF4560',
+                borderColor: theme.palette.reds.HotPink.backgroundColor,
                 style: {
                   color: '#fff',
-                  background: '#FF4560'
+                  background: theme.palette.reds.HotPink.backgroundColor
                 },
                 text: `Maximum CDN contribution: ${(
                   max.cdn / 1000000000

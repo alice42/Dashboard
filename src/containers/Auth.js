@@ -8,6 +8,7 @@ import {
   StyledFormContainer,
   StyledButton
 } from './styles/StyledAuth'
+import Error from '../components/Error'
 
 class Auth extends Component {
   state = {
@@ -61,6 +62,7 @@ class Auth extends Component {
             margin="normal"
             required
             fullWidth
+            placeholder="password"
             name="password"
             label="Password"
             type="password"
@@ -81,6 +83,7 @@ class Auth extends Component {
             Sign In
           </StyledButton>
         </StyledFormContainer>
+        {this.props.user.error && <Error message={this.props.user.error} />}
       </StyledContainer>
     )
   }

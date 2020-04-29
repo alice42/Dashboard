@@ -2,17 +2,17 @@ import React from 'react'
 import Chart from 'react-apexcharts'
 import theme from '../../theme'
 
-class AudienceChart extends React.Component {
+class EfficiencyChart extends React.Component {
   state = {
     options: {
-      colors: [theme.palette.yellows.BurntYellow.backgroundColor],
+      colors: [theme.palette.greens.Green.backgroundColor],
       chart: {
         height: 300,
         type: 'line',
         fontFamily: theme.typography
       },
       title: {
-        text: 'CONCURRENT VIEWERS',
+        text: 'EFFICIENCY',
         align: 'left',
         style: {
           fontFamily: theme.typography.h3.fontFamily
@@ -35,20 +35,6 @@ class AudienceChart extends React.Component {
         tooltip: {
           enabled: false
         }
-      },
-      tooltip: {
-        x: {
-          show: true,
-          format: 'dd MMM y, hh:mm:ss'
-        },
-        y: {
-          formatter: value => {
-            return `${value}`
-          },
-          title: {
-            formatter: seriesName => seriesName
-          }
-        }
       }
     },
     series: []
@@ -56,16 +42,26 @@ class AudienceChart extends React.Component {
 
   componentDidMount() {
     const data = []
-    if (this.props.viewers) {
-      this.props.viewers.audience.forEach(value => {
-        data.push([new Date(value[0]), value[1]])
+    if (this.props.bandwidth) {
+      this.props.bandwidth.cdn.forEach(item => {
+        const p2p = this.props.bandwidth.p2p.find(
+          data => data[0] === item[0]
+        )[1]
+        const cdn = item[1]
+        const results = p2p + cdn
+        if (p2p > 0) {
+          const percentage = ((p2p / results) * 100).toFixed(0)
+          data.push([new Date(item[0]), Number(percentage)])
+        } else {
+          data.push([new Date(item[0]), 0])
+        }
       })
     }
     this.setState({
       ...this.state,
       series: [
         {
-          name: 'Viewers',
+          name: 'percent',
           data
         }
       ]
@@ -76,7 +72,7 @@ class AudienceChart extends React.Component {
     return (
       <div>
         <Chart
-          id="AudienceChart"
+          id="EfficiencyChart"
           options={this.state.options}
           series={this.state.series}
           type="line"
@@ -87,4 +83,4 @@ class AudienceChart extends React.Component {
   }
 }
 
-export default AudienceChart
+export default EfficiencyChart

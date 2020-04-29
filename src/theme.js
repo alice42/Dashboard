@@ -34,9 +34,9 @@ let theme = createMuiTheme({
       TwilightLight: { backgroundColor: '#506A84' }
     },
     greens: {
-      LightGreen: '#C9EDD9',
-      Green: '#3FCB7E', // <-- Primay green (Efficiency)
-      Viridian: '#1D874D'
+      LightGreen: { backgroundColor: '#C9EDD9' },
+      Green: { backgroundColor: '#3FCB7E' }, // <-- Primay green (Efficiency)
+      Viridian: { backgroundColor: '#1D874D' }
     },
     yellows: {
       LightYellow: { backgroundColor: '#FCE4A3' },

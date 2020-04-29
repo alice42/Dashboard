@@ -1,15 +1,28 @@
 import React from 'react'
 import Chart from 'react-apexcharts'
+import theme from '../../theme'
 
 class CountriesChart extends React.Component {
   state = {
     options: {
+      colors: [
+        theme.palette.reds.HotPink.backgroundColor,
+        theme.palette.blues.Azure.backgroundColor
+      ],
       chart: {
+        fontFamily: theme.typography,
         toolbar: {
           show: true
         },
         zoom: {
           enabled: true
+        }
+      },
+      title: {
+        text: 'Top 5 countries',
+        align: 'left',
+        style: {
+          fontFamily: theme.typography.h3.fontFamily
         }
       },
       responsive: [
@@ -24,6 +37,9 @@ class CountriesChart extends React.Component {
           }
         }
       ],
+      dataLabels: {
+        enabled: false
+      },
       plotOptions: {
         bar: {
           horizontal: false
@@ -70,10 +86,6 @@ class CountriesChart extends React.Component {
         {
           name: 'P2P',
           data: parsedData.p2p.slice(0, 5)
-        },
-        {
-          name: 'EFFICENTY',
-          data: parsedData.percentage.slice(0, 5)
         }
       ]
     })

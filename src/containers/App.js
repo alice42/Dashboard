@@ -8,7 +8,6 @@ import * as notifActions from '../actions/notifActions'
 import * as dataActions from '../actions/dataActions'
 
 import Auth from './Auth'
-import Error from '../components/Error'
 import Home from './Home'
 
 class App extends Component {
@@ -19,7 +18,6 @@ class App extends Component {
     }
     return (
       <StylesProvider injectFirst>
-        {this.props.user.error && <Error message={this.props.user.error} />}
         {this.props.user.token && this.props.user.info ? (
           <HomeConnected />
         ) : (

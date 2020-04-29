@@ -12,16 +12,15 @@ import {
 const data = {
   bandwidth: routeBandwidth,
   audience: routeAudience,
+  streams: routeStreams,
   countries: routeCountries,
   platforms: routePlatforms
 }
 
-function toTimestamp(strDate) {
-  var datum = Date.parse(strDate)
-  return datum
-}
-const from = toTimestamp('Wed Apr 08 2020 06:53:30')
-const to = toTimestamp('Thu Apr 23 2020 17:53:30')
+var d = new Date()
+d.setDate(d.getDate() - 15)
+const from = Date.parse(d)
+const to = Date.parse(new Date())
 
 export const dataMethod = ({ token, dataType, aggregateType }) => {
   if (aggregateType) {

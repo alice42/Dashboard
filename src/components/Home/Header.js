@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import { AccountCircle } from '@material-ui/icons'
 import NotificationsIcon from '@material-ui/icons/Notifications'
-import { StyledMenuItem } from './StyledHeader'
+import { StyledMenuItem } from './styles/StyledHeader'
 
 const Header = ({
   theme,
