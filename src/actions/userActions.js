@@ -26,13 +26,6 @@ export const authRequest = data => {
   }
 }
 
-export const myInfoRequest = data => {
-  return {
-    type: INFO_REQUEST,
-    data
-  }
-}
-
 export const logoutRequest = () => {
   return {
     type: LOGOUT_REQUEST

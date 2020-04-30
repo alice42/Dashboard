@@ -4,12 +4,12 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development --open --hot",
-    "start": "npm run dev",
+    "start": "concurrently 'npm run dev' 'cd frontend-test-backend && npm run start && cd ..'",
     "clean": "rm -rf node_modules",
-    "setup": "npm run clean && npm i",
+    "setup": "npm run clean && npm i && cd frontend-test-backend && npm run clean && npm i && cd ..",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test": "jest"
+    "test": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx}"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -19,6 +19,7 @@
     "@storybook/addon-links": "^5.3.18",
     "@storybook/addons": "^5.3.18",
     "@storybook/react": "^5.3.18",
+    "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/react": "^10.0.3",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
@@ -45,12 +46,34 @@
   "dependencies": {
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "@material-ui/core": "^4.9.11",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/styles": "^4.9.10",
+    "@material-ui/utils": "^4.9.12",
+    "@react-mock/state": "^0.1.8",
+    "apexcharts": "^3.19.0",
+    "babel-jest": "^25.4.0",
+    "concurrently": "^5.2.0",
     "emotion-theming": "^10.0.27",
+    "fusioncharts": "^3.15.1-sr.1",
     "html-webpack-plugin": "^3.2.0",
+    "jest-canvas-mock": "^2.2.0",
+    "material-ui-icons": "^1.0.0-beta.36",
     "react": "^16.6.3",
+    "react-apexcharts": "^1.3.7",
     "react-dom": "^16.6.3",
+    "react-fusioncharts": "^3.1.2",
     "redux-saga": "^0.16.2",
     "url-loader": "^1.1.2",
     "webpack-combine-loaders": "^2.0.4"
+  },
+  "jest": {
+    "verbose": true,
+    "moduleNameMapper": {
+      "\\.(woff2)$": "<rootDir>/src/assets/fonts/__mocks__/fontMock.js"
+    },
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
   }
 }

@@ -8,6 +8,9 @@ import createSagaMiddleware from 'redux-saga'
 import mainReducer from './reducers/mainReducer'
 import rootSaga from './sagas/rootSaga'
 import AppContainer from './containers/App'
+import { ThemeProvider } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import theme from './theme'
 
 const sagaMiddleware = createSagaMiddleware()
 const middleware = [sagaMiddleware]
@@ -21,7 +24,10 @@ sagaMiddleware.run(rootSaga)
 
 render(
   <Provider store={store}>
-    <AppContainer />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <AppContainer />
+    </ThemeProvider>
   </Provider>,
   document.getElementById('root')
 )

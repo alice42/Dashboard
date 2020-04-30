@@ -54,7 +54,7 @@ function* auth(action) {
 }
 
 function* saveToken(action) {
-  window.localStorage.setItem('token', action.result.session_token)
+  window.sessionStorage.setItem('token', action.result.session_token)
 }
 
 function* myInfo() {
@@ -82,7 +82,7 @@ function* logout() {
     const token = yield select(state => state.user.token)
     const response = yield call(logoutMethod, token)
     if (response.status === 200) {
-      window.localStorage.clear()
+      window.sessionStorage.clear()
       yield put({
         type: LOGOUT_SUCCESS
       })
