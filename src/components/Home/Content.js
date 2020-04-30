@@ -9,7 +9,6 @@ import PlatformsChart from '../Charts/PlatformsChart'
 import TimeSerieChart from '../Charts/TimeSerieChart'
 
 const Content = ({ fetching, bandwidth, audience, countries, platforms }) => {
-  console.log(window.location.href)
   const url = window.location.href
   const alternativeView = url.substring(url.lastIndexOf('/') + 1, url.length)
   const views = {

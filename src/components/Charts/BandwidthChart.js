@@ -58,7 +58,6 @@ class BandwidthChart extends React.Component {
     let max
     if (this.props.bandwidth) {
       max = this.props.bandwidth.max
-      console.log(this.props.bandwidth)
       for (const dataType in this.props.bandwidth.data) {
         this.props.bandwidth.data[dataType].forEach(value => {
           parsedData[dataType].push([

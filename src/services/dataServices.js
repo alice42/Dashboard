@@ -17,9 +17,9 @@ const data = {
   platforms: routePlatforms
 }
 
-var d = new Date()
-d.setDate(d.getDate() - 15)
-const from = Date.parse(d)
+let date = new Date()
+date.setDate(date.getDate() - 15)
+const from = Date.parse(date)
 const to = Date.parse(new Date())
 
 export const dataMethod = ({ token, dataType, aggregateType }) => {

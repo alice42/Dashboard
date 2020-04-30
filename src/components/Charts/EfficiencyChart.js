@@ -35,6 +35,20 @@ class EfficiencyChart extends React.Component {
         tooltip: {
           enabled: false
         }
+      },
+      tooltip: {
+        x: {
+          show: true,
+          format: 'dd MMM y, hh:mm:ss'
+        },
+        y: {
+          formatter: value => {
+            return `${value} %`
+          },
+          title: {
+            formatter: seriesName => seriesName
+          }
+        }
       }
     },
     series: []

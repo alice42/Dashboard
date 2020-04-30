@@ -12,7 +12,7 @@ import Home from './Home'
 
 class App extends Component {
   render() {
-    const token = window.localStorage.getItem('token')
+    const token = window.sessionStorage.getItem('token')
     if (token && !this.props.user.token) {
       this.props.userActions.init(token)
     }

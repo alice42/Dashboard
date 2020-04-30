@@ -2,6 +2,7 @@ import React from 'react'
 import FusionCharts from 'fusioncharts'
 import TimeSeries from 'fusioncharts/fusioncharts.timeseries'
 import ReactFC from 'react-fusioncharts'
+import theme from '../../theme'
 
 ReactFC.fcRoot(FusionCharts, TimeSeries)
 
@@ -11,24 +12,31 @@ class TimeSerieChart extends React.Component {
       type: 'timeseries',
       renderAt: 'container',
       width: '100%',
-      height: '600',
+      height: '800',
+      caption: {
+        text: 'CDN & P2P metrics'
+      },
       dataSource: {
-        chart: {},
+        chart: {
+          showlegend: 0,
+          palettecolors: [
+            theme.palette.reds.HotPink.backgroundColor,
+            theme.palette.blues.Azure.backgroundColor,
+            theme.palette.yellows.BurntYellow.backgroundColor,
+            theme.palette.greens.Green.backgroundColor
+          ]
+        },
         yaxis: [
           {
-            style: {
-              title: { color: 'red' }
-            }
-          },
-          {
+            title: 'CAPACITY OFFLOAD',
             plot: [
               {
                 value: 'CDN',
-                type: 'smooth-area'
+                type: 'area'
               },
               {
                 value: 'P2P',
-                type: 'smooth-area'
+                type: 'area'
               }
             ],
             referenceLine: [
@@ -46,6 +54,7 @@ class TimeSerieChart extends React.Component {
             }
           },
           {
+            title: 'CONCURRENT VIEWERS',
             plot: [
               {
                 value: 'Viewers',
@@ -54,17 +63,16 @@ class TimeSerieChart extends React.Component {
             ]
           },
           {
+            title: 'EFFICIENCY',
             plot: [
               {
                 value: 'Efficiency',
-                type: 'smooth-line',
-                style: { line: { fill: 'red' } }
+                type: 'smooth-line'
               }
             ],
             format: {
               suffix: '%'
-            },
-            style: { line: { fill: 'red' } }
+            }
           }
         ]
       }

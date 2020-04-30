@@ -4,10 +4,6 @@
 
 almartin@student.42.fr
 
-## phone
-
-0661602129
-
 # Code
 
 ## Stack & BackEnd
@@ -39,7 +35,8 @@ app.use(function(req, res, next) {
 
 ## More
 
-all informations in order to run the porject can be found in the [README.md](https://github.com/alice42/Dashboard/blob/master/README.md)
+all informations in order to run the project can be found in the [README.md](https://github.com/alice42/Dashboard/blob/master/README.md)
+
 
 ### Charts
 

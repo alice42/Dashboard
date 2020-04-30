@@ -62,8 +62,6 @@ class PlatformsChart extends React.Component {
         parsedData.cdn.push((platform.cdn / 1000000000).toFixed(2))
         parsedData.p2p.push((platform.p2p / 1000000000).toFixed(2))
         parsedData.upload.push((platform.upload / 1000000000).toFixed(2))
-        // parsedData.max_viewers.push(platform.max_viewers)
-        // parsedData.average_viewers.push(platform.average_viewers.toFixed(2))
       })
     }
     this.setState({
