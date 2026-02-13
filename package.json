@@ -32,7 +32,7 @@
     "eslint": "^5.9.0",
     "eslint-config-prettier": "^3.3.0",
     "eslint-plugin-prettier": "^3.0.0",
-    "jest": "^25.4.0",
+    "jest": "^30.2.0",
     "prettier-eslint": "^8.8.2",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.3.1",
